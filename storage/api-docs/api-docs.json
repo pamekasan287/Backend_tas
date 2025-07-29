@@ -1,0 +1,220 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Produk Sepatu",
+        "description": "Dokumentasi API Produk Sepatu menggunakan Laravel + Swagger",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Localhost API"
+        }
+    ],
+    "paths": {
+        "/api/produk": {
+            "get": {
+                "tags": ["Produk"],
+                "summary": "Tampilkan semua produk",
+                "operationId": "3c74aa47134424450a7cf8e1942a2172",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Produk"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Produk"],
+                "summary": "Buat produk baru",
+                "operationId": "b907cee0c19dc0ebb3146af85fe73143",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": ["nama", "harga", "stok"],
+                                "properties": {
+                                    "nama": {
+                                        "type": "string"
+                                    },
+                                    "harga": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "stok": {
+                                        "type": "integer"
+                                    },
+                                    "deskripsi": {
+                                        "type": "string"
+                                    },
+                                    "gambar": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produk berhasil dibuat"
+                    }
+                }
+            }
+        },
+        "/api/produk/{id}": {
+            "get": {
+                "tags": ["Produk"],
+                "summary": "Ambil detail produk",
+                "operationId": "b11bed705c490d1b2fbf7bed8851b366",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail produk ditemukan"
+                    },
+                    "404": {
+                        "description": "Produk tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Produk"],
+                "summary": "Perbarui produk",
+                "operationId": "f29178e0a53044bac04c80b3f75b3699",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nama": {
+                                        "type": "string"
+                                    },
+                                    "harga": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "stok": {
+                                        "type": "integer"
+                                    },
+                                    "deskripsi": {
+                                        "type": "string"
+                                    },
+                                    "gambar": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produk berhasil diperbarui"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Produk"],
+                "summary": "Hapus produk (soft delete)",
+                "operationId": "b8fdf38f18c6945a8c51071f27472550",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produk berhasil dihapus"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Produk": {
+                "title": "Produk",
+                "required": ["nama", "harga", "stok"],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nama": {
+                        "type": "string"
+                    },
+                    "harga": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "stok": {
+                        "type": "integer"
+                    },
+                    "deskripsi": {
+                        "type": "string"
+                    },
+                    "gambar": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Produk",
+            "description": "Produk"
+        }
+    ]
+}
